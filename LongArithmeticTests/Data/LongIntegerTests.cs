@@ -36,6 +36,13 @@ namespace LongArithmeticTests.Data
         }
 
         [TestMethod]
+        public void Create_StartsWhithManyZero()
+        {
+            var number = LongInteger.Parse("0000000000000005894");
+            Assert.AreEqual("5894", number.ToString());
+        }
+
+        [TestMethod]
         public void Create_Negative()
         {
             var number = LongInteger.Parse("-1");

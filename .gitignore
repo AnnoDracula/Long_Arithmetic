@@ -1,2 +1,4 @@
 */bin/*
 */obj/*
+*.sln.DotSettings.user
+*.v12.suo

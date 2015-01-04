@@ -8,11 +8,10 @@ namespace LongArithmetic.Data
     public class LongInteger : ILongNumber
     {
         // 10000 - основание системы счисления
-        private string str;
         private List<int> values;
         private bool negative;
         private static int radix = 10000;
-        private static int radixLength = (int) Math.Log10(radix);
+        private static int radixLength = (int)Math.Log10(radix);
 
         private LongInteger()
         {
@@ -23,6 +22,8 @@ namespace LongArithmetic.Data
         private LongInteger(string str)
             : this()
         {
+            if (str == "")
+                throw new FormatException();
             if (str[0] == '-')
             {
                 negative = true;
@@ -38,6 +39,17 @@ namespace LongArithmetic.Data
                 values.Add(Int32.Parse(str.Substring(0, end)));
                 str = (str.Length == end) ? "" : str.Substring(end);
             }
+            Normalize();
+        }
+
+        private void Normalize()
+        {
+            while (values.Count>1 && values[0] == 0)
+            {
+                values.RemoveAt(0);
+            }
+            if (values.Count == 1 && values[0] == 0)
+                negative = false;
         }
 
         public override string ToString()
