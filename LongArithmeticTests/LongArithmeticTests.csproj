@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Data\LongIntegerTests.cs" />
     <Compile Include="Data\UtilsTests.cs" />
+    <Compile Include="Logic\LongIntegerMathTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

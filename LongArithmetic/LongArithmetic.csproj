@@ -39,14 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Constants.cs" />
     <Compile Include="Data\Utils.cs" />
     <Compile Include="Data\ILongNumber.cs" />
     <Compile Include="Data\LongInteger.cs" />
+    <Compile Include="Logic\LongIntegerMath.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Logic\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

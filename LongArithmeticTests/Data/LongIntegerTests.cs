@@ -11,7 +11,7 @@ namespace LongArithmeticTests.Data
         [ExpectedException(typeof(FormatException))]
         public void Create_Empty()
         {
-            var number = LongInteger.Parse("");
+            LongInteger.Parse("");
         }
 
         [TestMethod]
@@ -88,21 +88,21 @@ namespace LongArithmeticTests.Data
         [ExpectedException(typeof(FormatException))]
         public void Create_Liter()
         {
-            var number = LongInteger.Parse("15fd");
+            LongInteger.Parse("15fd");
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void Create_Double()
         {
-            var number = LongInteger.Parse("15.99");
+            LongInteger.Parse("15.99");
         }
 
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void Create_DoubleComa()
         {
-            var number = LongInteger.Parse("15,99");
+            LongInteger.Parse("15,99");
         }
     }
 }

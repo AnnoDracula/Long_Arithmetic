@@ -6,15 +6,14 @@ namespace LongArithmetic.Data
 {
     public class LongInteger : ILongNumber
     {
-        private readonly List<int> _values;
-        private bool _negative;
-        private const int Radix = 10000;
-        private static readonly int RadixLength = (int)Math.Log10(Radix);
+        internal readonly List<int> Values;
+        internal bool Negative;
+        
 
         private LongInteger()
         {
-            _negative = false;
-            _values = new List<int>();
+            Negative = false;
+            Values = new List<int>();
         }
 
         private LongInteger(string str)
@@ -24,17 +23,17 @@ namespace LongArithmetic.Data
                 throw new FormatException();
             if (str[0] == '-')
             {
-                _negative = true;
+                Negative = true;
                 str = str.Substring(1);
             }
 
-            int zeroLength = RadixLength - str.Length % RadixLength;
+            int zeroLength = Constants.RadixLength - str.Length % Constants.RadixLength;
             str = Utils.ZeroString(zeroLength) + str;
 
             while (str.Length > 0)
             {
-                var end = Math.Min(RadixLength, str.Length);
-                _values.Add(Int32.Parse(str.Substring(0, end)));
+                var end = Math.Min(Constants.RadixLength, str.Length);
+                Values.Add(Int32.Parse(str.Substring(0, end)));
                 str = (str.Length == end) ? "" : str.Substring(end);
             }
             Normalize();
@@ -42,23 +41,23 @@ namespace LongArithmetic.Data
 
         private void Normalize()
         {
-            while (_values.Count > 1 && _values[0] == 0)
+            while (Values.Count > 1 && Values[0] == 0)
             {
-                _values.RemoveAt(0);
+                Values.RemoveAt(0);
             }
-            if (_values.Count == 1 && _values[0] == 0)
-                _negative = false;
+            if (Values.Count == 1 && Values[0] == 0)
+                Negative = false;
         }
 
         public override string ToString()
         {
-            var res = (_negative) ? "-" : "";
-            for (var index = 0; index < _values.Count; index++)
+            var res = (Negative) ? "-" : "";
+            for (var index = 0; index < Values.Count; index++)
             {
-                var curValue = _values[index].ToString(CultureInfo.InvariantCulture);
+                var curValue = Values[index].ToString(CultureInfo.InvariantCulture);
                 if (index > 0)
                 {
-                    curValue = Utils.ZeroString(RadixLength - curValue.Length) + curValue;
+                    curValue = Utils.ZeroString(Constants.RadixLength - curValue.Length) + curValue;
                 }
                 res += curValue;
             }
