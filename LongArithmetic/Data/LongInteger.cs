@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+using System.Globalization;
 
 namespace LongArithmetic.Data
 {
     public class LongInteger : ILongNumber
     {
-        // 10000 - основание системы счисления
-        private List<int> values;
-        private bool negative;
-        private static int radix = 10000;
-        private static int radixLength = (int)Math.Log10(radix);
+        private readonly List<int> _values;
+        private bool _negative;
+        private const int Radix = 10000;
+        private static readonly int RadixLength = (int)Math.Log10(Radix);
 
         private LongInteger()
         {
-            negative = false;
-            values = new List<int>();
+            _negative = false;
+            _values = new List<int>();
         }
 
         private LongInteger(string str)
@@ -26,17 +24,17 @@ namespace LongArithmetic.Data
                 throw new FormatException();
             if (str[0] == '-')
             {
-                negative = true;
+                _negative = true;
                 str = str.Substring(1);
             }
 
-            int zeroLength = radixLength - str.Length % radixLength;
+            int zeroLength = RadixLength - str.Length % RadixLength;
             str = Utils.ZeroString(zeroLength) + str;
 
             while (str.Length > 0)
             {
-                var end = Math.Min(radixLength, str.Length);
-                values.Add(Int32.Parse(str.Substring(0, end)));
+                var end = Math.Min(RadixLength, str.Length);
+                _values.Add(Int32.Parse(str.Substring(0, end)));
                 str = (str.Length == end) ? "" : str.Substring(end);
             }
             Normalize();
@@ -44,23 +42,23 @@ namespace LongArithmetic.Data
 
         private void Normalize()
         {
-            while (values.Count>1 && values[0] == 0)
+            while (_values.Count > 1 && _values[0] == 0)
             {
-                values.RemoveAt(0);
+                _values.RemoveAt(0);
             }
-            if (values.Count == 1 && values[0] == 0)
-                negative = false;
+            if (_values.Count == 1 && _values[0] == 0)
+                _negative = false;
         }
 
         public override string ToString()
         {
-            var res = (negative) ? "-" : "";
-            for (var index = 0; index < values.Count; index++)
+            var res = (_negative) ? "-" : "";
+            for (var index = 0; index < _values.Count; index++)
             {
-                var curValue = values[index].ToString();
+                var curValue = _values[index].ToString(CultureInfo.InvariantCulture);
                 if (index > 0)
                 {
-                    curValue = Utils.ZeroString(radixLength - curValue.Length) + curValue;
+                    curValue = Utils.ZeroString(RadixLength - curValue.Length) + curValue;
                 }
                 res += curValue;
             }
