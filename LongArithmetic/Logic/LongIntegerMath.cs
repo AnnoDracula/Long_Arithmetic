@@ -1,4 +1,6 @@
-﻿using LongArithmetic.Data;
+﻿using System;
+using System.Runtime.Remoting.Messaging;
+using LongArithmetic.Data;
 
 namespace LongArithmetic.Logic
 {
@@ -18,17 +20,15 @@ namespace LongArithmetic.Logic
             }
             return true;
         }
+        public static int Compare(LongInteger v1, LongInteger v2)
+        {
+            throw new NotImplementedException();
+        }
 
-
+        public static LongInteger Add(LongInteger v1, LongInteger v2)
+        {
+            throw new NotImplementedException();
+        }
     }
-    //        public static int Compare(LongInteger v1, LongInteger v2)
-    //        {
-    //            //            if()
-    //        }
-    //
-    //        public static LongInteger Add(LongInteger v1, LongInteger v2)
-    //        {
-    ////            var result;
-    //        }
 }
 
