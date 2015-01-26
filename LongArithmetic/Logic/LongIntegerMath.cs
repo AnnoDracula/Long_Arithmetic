@@ -11,7 +11,7 @@ namespace LongArithmetic.Logic
             if (v1.Values.Count != v2.Values.Count)
                 return false;
 
-            for (var i = 0; i <= v1.Values.Count; i++)
+            for (var i = 0; i < v1.Values.Count; i++)
             {
                 if (v1.Values[i] != v2.Values[i])
                     return false;
