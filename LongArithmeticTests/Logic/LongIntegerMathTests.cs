@@ -114,7 +114,7 @@ namespace LongArithmeticTests.Logic
         public void Compare_PositiveDifferentCount_SecondLarger()
         {
             var result = LongIntegerMath.Compare(LongInteger.Parse("851"), LongInteger.Parse("88557"));
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(2, result);
         }
 
         [TestMethod]
@@ -131,5 +131,18 @@ namespace LongArithmeticTests.Logic
             Assert.AreEqual(1, result);
         }
 
+        [TestMethod]
+        public void Compare_PositiveEquals()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("8512222876"), LongInteger.Parse("8512222876"));
+            Assert.AreEqual(0, result);
+        }
+
+        [TestMethod]
+        public void Compare_NegativeEquals()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("-8512222876"), LongInteger.Parse("-8512222876"));
+            Assert.AreEqual(0, result);
+        }
     }
 }

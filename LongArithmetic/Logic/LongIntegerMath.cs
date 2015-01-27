@@ -32,14 +32,17 @@ namespace LongArithmetic.Logic
             }
             if (v1.Values.Count != v2.Values.Count)
             {
-                if (v1.Negative && v1.Values.Count > v2.Values.Count)
-                    result = 2;
+                if (v1.Negative)
+
+                    result = v1.Values.Count > v2.Values.Count ? 2 : 1;
                 else
-                    result = 1;
+                    result = v1.Values.Count > v2.Values.Count ? 1 : 2; 
                 return result;
             }
-            for (var i = 0; i < v1.Values.Count; i++)
+            for (var i = 0; i < v1.Values.Count;)
             {
+                while (v1.Values[i] == v2.Values[i])
+                    i = i + 1;
                 if (v1.Negative)
                 {
                     result = v1.Values[i] > v2.Values[i] ? 2 : 1;
@@ -48,6 +51,7 @@ namespace LongArithmetic.Logic
                 {
                     result = v1.Values[i] > v2.Values[i] ? 1 : 2;
                 }
+                return result;
             }
             return result;
         }
