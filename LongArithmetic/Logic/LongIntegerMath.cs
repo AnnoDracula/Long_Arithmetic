@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.Remoting.Messaging;
 using LongArithmetic.Data;
 
 namespace LongArithmetic.Logic
@@ -22,7 +21,31 @@ namespace LongArithmetic.Logic
         }
         public static int Compare(LongInteger v1, LongInteger v2)
         {
-            throw new NotImplementedException();
+            var result = 0;
+            if (v1.Negative != v2.Negative)
+            {
+                if (v1.Negative)
+                    result = 2;
+                else
+                    result = 1;
+                return result;
+            }
+            if (v1.Values.Count != v2.Values.Count)
+            {
+                if (v1.Negative && v1.Values.Count > v2.Values.Count)
+                    result = 2;
+                else
+                    result = 1;
+                return result;
+            }
+            for (var i = 0; i < v1.Values.Count; i++)
+            {
+                if (v1.Values[i] > v2.Values[i])
+                    result = 1;
+                else
+                    result = 2;
+            }
+            return result;
         }
 
         public static LongInteger Add(LongInteger v1, LongInteger v2)

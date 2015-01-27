@@ -1,4 +1,6 @@
-﻿using LongArithmetic.Data;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
+using LongArithmetic.Data;
 using LongArithmetic.Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -44,6 +46,89 @@ namespace LongArithmeticTests.Logic
         {
             var number = LongInteger.Parse("15977");
             Assert.IsTrue(LongIntegerMath.Equals(number, number));
+        }
+
+        [TestMethod]
+        public void Equals_StartWithZero_IsTrue()
+        {
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("0128"), LongInteger.Parse("128")));
+        }
+
+        [TestMethod]
+        public void Compare_DifferentSign()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("-8567"), LongInteger.Parse("8567"));
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
+        public void Compare_Negatives_FirstLarger()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("-78895"), LongInteger.Parse("-85557"));
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void Compare_Negatives_SecondLarger()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("-85157"), LongInteger.Parse("-78557"));
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
+        public void Compare_Positive_FirstLarger()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("98895"), LongInteger.Parse("85557"));
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void Compare_Positive_SecondLarger()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("85157"), LongInteger.Parse("88557"));
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
+        public void Compare_NegativeDifferentCount_FirstLarger()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("-98895"), LongInteger.Parse("-8559557"));
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void Compare_NegativeDifferentCount_SecondLarger()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("-98895"), LongInteger.Parse("-8557"));
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
+        public void Compare_PositiveDifferentCount_FirstLarger()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("8515725"), LongInteger.Parse("88557"));
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void Compare_PositiveDifferentCount_SecondLarger()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("851"), LongInteger.Parse("88557"));
+            Assert.AreEqual(1, result);
+        }
+
+        [TestMethod]
+        public void Compare_NegativeEqualFirstPart()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("-85122228767945"), LongInteger.Parse("-85122228767456"));
+            Assert.AreEqual(2, result);
+        }
+
+        [TestMethod]
+        public void Compare_PositiveEqualFirstPart()
+        {
+            var result = LongIntegerMath.Compare(LongInteger.Parse("85122228767945"), LongInteger.Parse("85122228767456"));
+            Assert.AreEqual(1, result);
         }
 
     }
