@@ -22,12 +22,12 @@ namespace LongArithmetic.Logic
         public static int Compare(LongInteger v1, LongInteger v2)
         {
             var result = 0;
+            if (Equals(v1, v2))
+                return result;
+
             if (v1.Negative != v2.Negative)
             {
-                if (v1.Negative)
-                    result = 2;
-                else
-                    result = 1;
+                result = v1.Negative ? 2 : 1;
                 return result;
             }
             if (v1.Values.Count != v2.Values.Count)
@@ -40,18 +40,24 @@ namespace LongArithmetic.Logic
             }
             for (var i = 0; i < v1.Values.Count; i++)
             {
-                if (v1.Values[i] > v2.Values[i])
-                    result = 1;
+                if (v1.Negative)
+                {
+                    result = v1.Values[i] > v2.Values[i] ? 2 : 1;
+                }
                 else
-                    result = 2;
+                {
+                    result = v1.Values[i] > v2.Values[i] ? 1 : 2;
+                }
             }
             return result;
         }
-
         public static LongInteger Add(LongInteger v1, LongInteger v2)
         {
             throw new NotImplementedException();
         }
     }
 }
+
+
+
 
