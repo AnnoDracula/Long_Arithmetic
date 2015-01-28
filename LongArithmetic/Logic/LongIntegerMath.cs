@@ -19,46 +19,32 @@ namespace LongArithmetic.Logic
             }
             return true;
         }
+
+        /// <summary> Return "0" if (v1 = v2);  Return positive result if (v1 > v2);  Return negative result if (v2 > v1)</summary>>
+        /// <param name="v1">compared value 1</param>
+        /// <param name="v2"> compared value 2</param>
         public static int Compare(LongInteger v1, LongInteger v2)
         {
-            var result = 0;
             if (Equals(v1, v2))
-                return result;
+                return 0;
 
+            var sign = ((v1.Negative) ? -1 : 1);
             if (v1.Negative != v2.Negative)
-            {
-                result = v1.Negative ? 2 : 1;
-                return result;
-            }
+                return sign;
+            
             if (v1.Values.Count != v2.Values.Count)
-            {
-                if (v1.Negative)
+                return sign * (v1.Values.Count - v2.Values.Count);
 
-                    result = v1.Values.Count > v2.Values.Count ? 2 : 1;
-                else
-                    result = v1.Values.Count > v2.Values.Count ? 1 : 2; 
-                return result;
-            }
-            for (var i = 0; i < v1.Values.Count;)
-            {
-                while (v1.Values[i] == v2.Values[i])
-                    i = i + 1;
-                if (v1.Negative)
-                {
-                    result = v1.Values[i] > v2.Values[i] ? 2 : 1;
-                }
-                else
-                {
-                    result = v1.Values[i] > v2.Values[i] ? 1 : 2;
-                }
-                return result;
-            }
-            return result;
+            var i = 0;
+            while (i < v1.Values.Count && v1.Values[i] == v2.Values[i])
+                i++;
+            return sign * v1.Values[i].CompareTo(v2.Values[i]);
         }
         public static LongInteger Add(LongInteger v1, LongInteger v2)
         {
             throw new NotImplementedException();
         }
+
     }
 }
 
