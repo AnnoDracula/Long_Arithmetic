@@ -47,7 +47,7 @@ namespace LongArithmetic.Data
 
         private void Normalize()
         {
-            while (this.Values.Count > 1 && Values[0] == 0)
+            while (Values.Count > 1 && Values[0] == 0)
             {
                 Values.RemoveAt(0);
             }
@@ -63,6 +63,11 @@ namespace LongArithmetic.Data
         public void InverSign()
         {
             Negative = !Negative;
+        }
+
+        public bool IsNegative()
+        {
+            return Negative;
         }
 
         //        public override bool Equals(object obj)

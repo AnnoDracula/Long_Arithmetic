@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.InteropServices;
 using LongArithmetic.Data;
 
 namespace LongArithmetic.Logic
@@ -76,6 +75,11 @@ namespace LongArithmetic.Logic
             
         }
 
+        public static LongInteger SubstructLongInteger(LongInteger v1, LongInteger v2)
+        {
+            throw new NotImplementedException();
+        }
+
         public static LongInteger OppositeValue(LongInteger value)
         {
             var result = value.Clone();
@@ -83,10 +87,6 @@ namespace LongArithmetic.Logic
             return result;
         }
 
-        public static LongInteger SubstructLongInteger(LongInteger v1, LongInteger v2)
-        {
-            throw new NotImplementedException();
-        }
 
 
     }

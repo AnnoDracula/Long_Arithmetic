@@ -2,5 +2,7 @@
 {
     internal interface ILongNumber
     {
+        bool IsNegative();
+        void InverSign();
     }
 }
