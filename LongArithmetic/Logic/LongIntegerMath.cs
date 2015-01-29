@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using LongArithmetic.Data;
 
 namespace LongArithmetic.Logic
@@ -7,6 +8,7 @@ namespace LongArithmetic.Logic
     {
         public static bool Equals(LongInteger v1, LongInteger v2)
         {
+            //            return v1.Equals(v2);
             if (v1.Negative != v2.Negative)
                 return false;
             if (v1.Values.Count != v2.Values.Count)
@@ -31,7 +33,7 @@ namespace LongArithmetic.Logic
             var sign = ((v1.Negative) ? -1 : 1);
             if (v1.Negative != v2.Negative)
                 return sign;
-            
+
             if (v1.Values.Count != v2.Values.Count)
                 return sign * (v1.Values.Count - v2.Values.Count);
 
@@ -40,14 +42,52 @@ namespace LongArithmetic.Logic
                 i++;
             return sign * v1.Values[i].CompareTo(v2.Values[i]);
         }
-        public static LongInteger Add(LongInteger v1, LongInteger v2)
+        public static LongInteger SummLongInteger(LongInteger v1, LongInteger v2)
+        {
+            if (v1.Values.Count < v2.Values.Count)
+            {
+                return SummLongInteger(v2, v1);
+            }
+            if (v1.Negative == v2.Negative)
+            {
+                var summ = v1.Clone();
+                var i = v1.Values.Count - 1;
+                var j = v2.Values.Count - 1;
+                var remember = 0;
+                while (i >= 0)
+                {
+                    var res = summ.Values[i] + ((j >= 0) ? v2.Values[j] : 0) + remember;
+                    remember = res / Constants.Radix;
+                    res = res % Constants.Radix;
+                    summ.Values[i] = res;
+                    i--;
+                    j--;
+                }
+                if (remember != 0)
+                    summ.Values.Insert(0, remember);
+                return summ;
+            }
+
+            if (v1.Negative)
+            {
+                return OppositeValue(SubstructLongInteger(OppositeValue(v1), v2));
+            }
+            return SubstructLongInteger(v1, OppositeValue(v2));
+            
+        }
+
+        public static LongInteger OppositeValue(LongInteger value)
+        {
+            var result = value.Clone();
+            result.InverSign();
+            return result;
+        }
+
+        public static LongInteger SubstructLongInteger(LongInteger v1, LongInteger v2)
         {
             throw new NotImplementedException();
         }
 
+
     }
 }
-
-
-
-

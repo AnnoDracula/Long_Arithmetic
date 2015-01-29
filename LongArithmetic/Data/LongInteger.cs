@@ -8,12 +8,18 @@ namespace LongArithmetic.Data
     {
         internal readonly List<int> Values;
         internal bool Negative;
-        
+
 
         private LongInteger()
         {
             Negative = false;
             Values = new List<int>();
+        }
+
+        private LongInteger(LongInteger clonableObject)
+        {
+            Negative = clonableObject.Negative;
+            Values = new List<int>(clonableObject.Values);
         }
 
         private LongInteger(string str)
@@ -41,13 +47,42 @@ namespace LongArithmetic.Data
 
         private void Normalize()
         {
-            while (Values.Count > 1 && Values[0] == 0)
+            while (this.Values.Count > 1 && Values[0] == 0)
             {
                 Values.RemoveAt(0);
             }
             if (Values.Count == 1 && Values[0] == 0)
                 Negative = false;
         }
+
+        public LongInteger Clone()
+        {
+            return new LongInteger(this);
+        }
+
+        public void InverSign()
+        {
+            Negative = !Negative;
+        }
+
+        //        public override bool Equals(object obj)
+        //        {
+        //            if (obj.GetType() != typeof (LongInteger))
+        //                return false;
+        //            var v2 = (LongInteger)obj;
+        //
+        //            if (Negative != v2.Negative)
+        //                return false;
+        //            if (Values.Count != v2.Values.Count)
+        //                return false;
+        //
+        //            for (var i = 0; i < Values.Count; i++)
+        //            {
+        //                if (Values[i] != v2.Values[i])
+        //                    return false;
+        //            }
+        //            return true;
+        //        }
 
         public override string ToString()
         {
