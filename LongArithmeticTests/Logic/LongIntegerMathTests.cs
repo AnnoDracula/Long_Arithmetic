@@ -187,7 +187,34 @@ namespace LongArithmeticTests.Logic
         [TestMethod]
         public void SummLongInteger_IncreasesSignificantBit()
         {
-            var result = LongIntegerMath.SummLongInteger(LongInteger.Parse("9999999999999999999999"), LongInteger.Parse("1"));
+            var result = LongIntegerMath.SummLongInteger(LongInteger.Parse("9"), LongInteger.Parse("1"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("10"), result));
+        
+            result = LongIntegerMath.SummLongInteger(LongInteger.Parse("99"), LongInteger.Parse("1"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("100"), result));
+
+            result = LongIntegerMath.SummLongInteger(LongInteger.Parse("999"), LongInteger.Parse("1"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("1000"), result));
+
+            result = LongIntegerMath.SummLongInteger(LongInteger.Parse("9999"), LongInteger.Parse("1"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("10000"), result));
+
+            result = LongIntegerMath.SummLongInteger(LongInteger.Parse("99999"), LongInteger.Parse("1"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("100000"), result));
+
+            result = LongIntegerMath.SummLongInteger(LongInteger.Parse("999999"), LongInteger.Parse("1"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("1000000"), result));
+
+            result = LongIntegerMath.SummLongInteger(LongInteger.Parse("9999999"), LongInteger.Parse("1"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("10000000"), result));
+
+            result = LongIntegerMath.SummLongInteger(LongInteger.Parse("99999999"), LongInteger.Parse("1"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("100000000"), result));
+
+            result = LongIntegerMath.SummLongInteger(LongInteger.Parse("999999999"), LongInteger.Parse("1"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("1000000000"), result));
+            
+            result = LongIntegerMath.SummLongInteger(LongInteger.Parse("9999999999999999999999"), LongInteger.Parse("1"));
             Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("10000000000000000000000"), result));
         }
 
@@ -210,6 +237,13 @@ namespace LongArithmeticTests.Logic
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("86754358512250952"), LongInteger.Parse("28076"));
             Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("86754358512222876"), result));
+        }
+
+        [TestMethod]
+        public void SubstructLongInteger_Positives_SubtrahendBiggerThenMinuend()
+        {
+            var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("28076"), LongInteger.Parse("86754358512250952"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-86754358512222876"), result));
         }
 
         [TestMethod]
@@ -245,6 +279,20 @@ namespace LongArithmeticTests.Logic
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("10000000000000000000000"), LongInteger.Parse("1"));
             Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("9999999999999999999999"), result));
+        }
+
+        [TestMethod]
+        public void SubstructLongInteger_DecreasesSignificantBitInMiddle()
+        {
+            var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("10000000020000000000000"), LongInteger.Parse("1"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("10000000019999999999999"), result));
+        }
+
+        [TestMethod]
+        public void SubstructLongInteger_SubtrahendBiggerThenMinuendByOne()
+        {
+            var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("786783732783542786378378"), LongInteger.Parse("786783732783542786378379"));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-1"), result));
         }
 
         #endregion

@@ -45,7 +45,7 @@ namespace LongArithmetic.Data
             Normalize();
         }
 
-        private void Normalize()
+        internal void Normalize()
         {
             while (Values.Count > 1 && Values[0] == 0)
             {

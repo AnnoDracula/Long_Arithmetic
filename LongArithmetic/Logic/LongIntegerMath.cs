@@ -90,6 +90,7 @@ namespace LongArithmetic.Logic
                 i--;
                 j--;
             }
+            substruct.Normalize();
             return substruct;
         }
 
@@ -100,7 +101,7 @@ namespace LongArithmetic.Logic
             return result;
         }
 
-        internal static LongInteger DecreasesSignificantBit(LongInteger value, int i)
+        private static void DecreasesSignificantBit(LongInteger value, int i)
         {
             value.Values[i] = (value.Values[i] == 0 ? 1 : value.Values[i]) * Constants.Radix;
             if (value.Values[i - 1] - 1 < 0 && i - 1 > 0)
@@ -109,10 +110,7 @@ namespace LongArithmetic.Logic
                 DecreasesSignificantBit(value, k);
             }
             value.Values[i - 1]--;
-            return value;
         }
-
-
-
+        
     }
 }
