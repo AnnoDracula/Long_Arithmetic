@@ -72,12 +72,25 @@ namespace LongArithmetic.Logic
                 return OppositeValue(SubstructLongInteger(OppositeValue(v1), v2));
             }
             return SubstructLongInteger(v1, OppositeValue(v2));
-            
+
         }
 
         public static LongInteger SubstructLongInteger(LongInteger v1, LongInteger v2)
         {
-            throw new NotImplementedException();
+            var substruct = v1.Clone();
+            var i = v1.Values.Count - 1;
+            var j = v2.Values.Count - 1;
+            while (j >= 0)
+            {
+                if (substruct.Values[i] < v2.Values[j])
+                {
+                    DecreasesSignificantBit(substruct, i);
+                }
+                substruct.Values[i] = substruct.Values[i] - ((j >= 0) ? v2.Values[j] : 0);
+                i--;
+                j--;
+            }
+            return substruct;
         }
 
         public static LongInteger OppositeValue(LongInteger value)
@@ -85,6 +98,18 @@ namespace LongArithmetic.Logic
             var result = value.Clone();
             result.InverSign();
             return result;
+        }
+
+        internal static LongInteger DecreasesSignificantBit(LongInteger value, int i)
+        {
+            value.Values[i] = (value.Values[i] == 0 ? 1 : value.Values[i]) * Constants.Radix;
+            if (value.Values[i - 1] - 1 < 0 && i - 1 > 0)
+            {
+                var k = i - 1;
+                DecreasesSignificantBit(value, k);
+            }
+            value.Values[i - 1]--;
+            return value;
         }
 
 
