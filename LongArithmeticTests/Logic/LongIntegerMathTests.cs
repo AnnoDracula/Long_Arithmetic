@@ -264,7 +264,7 @@ namespace LongArithmeticTests.Logic
         public void SubstructLongInteger_DifferentSign_FirstNegative()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("-8675435823800"), LongInteger.Parse("28076"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-8675435795724"), result));
+            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-8675435851876"), result));
         }
 
         [TestMethod]
