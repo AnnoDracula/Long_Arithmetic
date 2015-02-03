@@ -77,7 +77,33 @@ namespace LongArithmetic.Logic
 
         public static LongInteger SubstructLongInteger(LongInteger v1, LongInteger v2)
         {
+            if (v1.Values.Count < v2.Values.Count)
+            {
+                if (v1.Negative != v2.Negative)
+                {
+                    if (v1.Negative)
+                    {
+                        return OppositeValue(SummLongInteger(OppositeValue(v1), v2));
+                    }
+                    return SummLongInteger(v1, OppositeValue(v2));
+                }
+                if (v1.Negative)
+                {
+                    v1.Negative = false;
+                    v2.Negative = false;
+                    return SubstructLongInteger(v2, v1);
+                }
+                return OppositeValue(SubstructLongInteger(v2, v1));
+            }
             var substruct = v1.Clone();
+
+            if (Compare(v1, v2) < 0)
+            {
+                if (v1.Negative == v2.Negative)
+                SubstructLongInteger(OppositeValue(v2), v1);
+                SubstructLongInteger(v2, v1);
+            }
+    
             var i = v1.Values.Count - 1;
             var j = v2.Values.Count - 1;
             while (j >= 0)
