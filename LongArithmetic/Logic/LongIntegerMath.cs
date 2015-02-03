@@ -1,5 +1,4 @@
-﻿using System;
-using LongArithmetic.Data;
+﻿using LongArithmetic.Data;
 
 namespace LongArithmetic.Logic
 {
@@ -77,22 +76,17 @@ namespace LongArithmetic.Logic
 
         public static LongInteger SubstructLongInteger(LongInteger v1, LongInteger v2)
         {
-            
+            if (Compare(v1, v2) == 0)
+                return LongInteger.Parse("0");
+
+            if (v1.Negative)
+                return OppositeValue(SummLongInteger(v2, OppositeValue(v1)));
+
+            if (v2.Negative)
+                return SummLongInteger(v1, OppositeValue(v2));
+
             if (Compare(v1, v2) < 0)
-            {
-                if (v1.Negative != v2.Negative)
-                return OppositeValue(SummLongInteger(OppositeValue(v1), v2));
-                if (v1.Negative)
-                    return SubstructLongInteger(OppositeValue(v2), OppositeValue(v1));
                 return OppositeValue(SubstructLongInteger(v2, v1));
-            }
-            if (Compare(v1, v2) > 0)
-            {
-                if (v1.Negative != v2.Negative)
-                    return SummLongInteger(v1, OppositeValue(v2));
-                if (v1.Negative)
-                    return (SubstructLongInteger(OppositeValue(v2), OppositeValue(v1)));
-            }
 
             var substruct = v1.Clone();
             var i = v1.Values.Count - 1;
@@ -128,6 +122,6 @@ namespace LongArithmetic.Logic
             }
             value.Values[i - 1]--;
         }
-        
+
     }
 }
