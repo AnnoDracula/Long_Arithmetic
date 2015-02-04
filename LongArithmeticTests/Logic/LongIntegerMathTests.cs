@@ -11,46 +11,46 @@ namespace LongArithmeticTests.Logic
         [TestMethod]
         public void Equals_Zero_IsTrue()
         {
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("0"), LongInteger.Parse("0")));
+            Assert.AreEqual(LongInteger.Parse("0"), LongInteger.Parse("0"));
         }
 
         [TestMethod]
         public void Equals_Int_IsTrue()
         {
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("5"), LongInteger.Parse("5")));
+            Assert.AreEqual(LongInteger.Parse("5"), LongInteger.Parse("5"));
         }
 
         [TestMethod]
         public void Equals_NegativeInt_IsTrue()
         {
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-8"), LongInteger.Parse("-8")));
+            Assert.AreEqual(LongInteger.Parse("-8"), LongInteger.Parse("-8"));
         }
 
         [TestMethod]
         public void Equals_LongInt_IsTrue()
         {
-            var str = "8181651268481683184198419841952629518411252952951051091091501098";
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse(str), LongInteger.Parse(str)));
+            const string str = "8181651268481683184198419841952629518411252952951051091091501098";
+            Assert.AreEqual(LongInteger.Parse(str), LongInteger.Parse(str));
         }
 
         [TestMethod]
         public void Equals_NegativeLongInt_IsTrue()
         {
-            var str = "8181651268481683184198419841952629518411252952951051091091501098";
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-" + str), LongInteger.Parse("-" + str)));
+            const string str = "8181651268481683184198419841952629518411252952951051091091501098";
+            Assert.AreEqual(LongInteger.Parse("-" + str), LongInteger.Parse("-" + str));
         }
 
         [TestMethod]
         public void Equals_AnyNumberIsEqualToItself_IsTrue()
         {
             var number = LongInteger.Parse("15977");
-            Assert.IsTrue(LongIntegerMath.Equals(number, number));
+            Assert.AreEqual(number, number);
         }
 
         [TestMethod]
         public void Equals_StartWithZero_IsTrue()
         {
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("0128"), LongInteger.Parse("128")));
+            Assert.AreEqual(LongInteger.Parse("0128"), LongInteger.Parse("128"));
         }
         #endregion
 
@@ -153,69 +153,69 @@ namespace LongArithmeticTests.Logic
         public void SummLongInteger_Positives()
         {
             var result = LongIntegerMath.SummLongInteger(LongInteger.Parse("86754358512222876"), LongInteger.Parse("28076"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("86754358512250952"), result));
+            Assert.AreEqual(LongInteger.Parse("86754358512250952"), result);
         }
 
         [TestMethod]
         public void SummLongInteger_Negatives()
         {
             var result = LongIntegerMath.SummLongInteger(LongInteger.Parse("-86754358512222876"), LongInteger.Parse("-28076"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-86754358512250952"), result));
+            Assert.AreEqual(LongInteger.Parse("-86754358512250952"), result);
         }
 
         [TestMethod]
         public void SummLongInteger_DifferentSign_FirstNegative()
         {
             var result = LongIntegerMath.SummLongInteger(LongInteger.Parse("-8675435851876"), LongInteger.Parse("28076"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-8675435823800"), result));
+            Assert.AreEqual(LongInteger.Parse("-8675435823800"), result);
         }
 
         [TestMethod]
         public void SummLongInteger_DifferentSign_SecondNegative()
         {
             var result = LongIntegerMath.SummLongInteger(LongInteger.Parse("8675435851876"), LongInteger.Parse("-28076"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("8675435823800"), result));
+            Assert.AreEqual(LongInteger.Parse("8675435823800"), result);
         }
 
         [TestMethod]
         public void SummLongInteger_EqualValues()
         {
             var result = LongIntegerMath.SummLongInteger(LongInteger.Parse("28076"), LongInteger.Parse("28076"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("56152"), result));
+            Assert.AreEqual(LongInteger.Parse("56152"), result);
         }
 
         [TestMethod]
         public void SummLongInteger_IncreasesSignificantBit()
         {
             var result = LongIntegerMath.SummLongInteger(LongInteger.Parse("9"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("10"), result));
-        
+            Assert.AreEqual(LongInteger.Parse("10"), result);
+
             result = LongIntegerMath.SummLongInteger(LongInteger.Parse("99"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("100"), result));
+            Assert.AreEqual(LongInteger.Parse("100"), result);
 
             result = LongIntegerMath.SummLongInteger(LongInteger.Parse("999"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("1000"), result));
+            Assert.AreEqual(LongInteger.Parse("1000"), result);
 
             result = LongIntegerMath.SummLongInteger(LongInteger.Parse("9999"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("10000"), result));
+            Assert.AreEqual(LongInteger.Parse("10000"), result);
 
             result = LongIntegerMath.SummLongInteger(LongInteger.Parse("99999"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("100000"), result));
+            Assert.AreEqual(LongInteger.Parse("100000"), result);
 
             result = LongIntegerMath.SummLongInteger(LongInteger.Parse("999999"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("1000000"), result));
+            Assert.AreEqual(LongInteger.Parse("1000000"), result);
 
             result = LongIntegerMath.SummLongInteger(LongInteger.Parse("9999999"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("10000000"), result));
+            Assert.AreEqual(LongInteger.Parse("10000000"), result);
 
             result = LongIntegerMath.SummLongInteger(LongInteger.Parse("99999999"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("100000000"), result));
+            Assert.AreEqual(LongInteger.Parse("100000000"), result);
 
             result = LongIntegerMath.SummLongInteger(LongInteger.Parse("999999999"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("1000000000"), result));
-            
+            Assert.AreEqual(LongInteger.Parse("1000000000"), result);
+
             result = LongIntegerMath.SummLongInteger(LongInteger.Parse("9999999999999999999999"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("10000000000000000000000"), result));
+            Assert.AreEqual(LongInteger.Parse("10000000000000000000000"), result);
         }
 
         [TestMethod]
@@ -236,107 +236,124 @@ namespace LongArithmeticTests.Logic
         public void SubstructLongInteger_Positives()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("86754358512250952"), LongInteger.Parse("28076"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("86754358512222876"), result));
+            Assert.AreEqual(LongInteger.Parse("86754358512222876"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_Positives_SubtrahendBiggerThenMinuend()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("28076"), LongInteger.Parse("86754358512250952"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-86754358512222876"), result));
+            Assert.AreEqual(LongInteger.Parse("-86754358512222876"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_Negatives()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("-86754358512250952"), LongInteger.Parse("-28076"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-86754358512222876"), result));
+            Assert.AreEqual(LongInteger.Parse("-86754358512222876"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_Negatives_SecondValueLongerThenFirst()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("-28076"), LongInteger.Parse("-86754358512250952"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("86754358512222876"), result));
+            Assert.AreEqual(LongInteger.Parse("86754358512222876"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_DifferentSign_FirstNegative()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("-8675435823800"), LongInteger.Parse("28076"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-8675435851876"), result));
+            Assert.AreEqual(LongInteger.Parse("-8675435851876"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_DifferentSign_FirstNegative_SecondLonger()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("-28076"), LongInteger.Parse("8675435823800"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-8675435851876"), result));
+            Assert.AreEqual(LongInteger.Parse("-8675435851876"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_DifferentSign_SecondNegative()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("8675435823800"), LongInteger.Parse("-28076"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("8675435851876"), result));
+            Assert.AreEqual(LongInteger.Parse("8675435851876"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_DifferentSign_SecondNegativeAndLonger()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("28076"), LongInteger.Parse("-8675435823800"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("8675435851876"), result));
+            Assert.AreEqual(LongInteger.Parse("8675435851876"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_EqualValues()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("56152"), LongInteger.Parse("56152"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("0"), result));
+            Assert.AreEqual(LongInteger.Parse("0"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_EqualNegativeValues()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("-56152"), LongInteger.Parse("-56152"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("0"), result));
+            Assert.AreEqual(LongInteger.Parse("0"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_EqualValues_DifferentSign_FirstNegative()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("-56152"), LongInteger.Parse("56152"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-112304"), result));
+            Assert.AreEqual(LongInteger.Parse("-112304"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_EqualValues_DifferentSign_SecondNegative()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("56152"), LongInteger.Parse("-56152"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("112304"), result));
+            Assert.AreEqual(LongInteger.Parse("112304"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_DecreasesSignificantBit()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("10000000000000000000000"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("9999999999999999999999"), result));
+            Assert.AreEqual(LongInteger.Parse("9999999999999999999999"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_DecreasesSignificantBitInMiddle()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("10000000020000000000000"), LongInteger.Parse("1"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("10000000019999999999999"), result));
+            Assert.AreEqual(LongInteger.Parse("10000000019999999999999"), result);
         }
 
         [TestMethod]
         public void SubstructLongInteger_SubtrahendBiggerThenMinuendByOne()
         {
             var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("786783732783542786378378"), LongInteger.Parse("786783732783542786378379"));
-            Assert.IsTrue(LongIntegerMath.Equals(LongInteger.Parse("-1"), result));
+            Assert.AreEqual(LongInteger.Parse("-1"), result);
         }
 
+        [TestMethod]
+        public void SubstructLongInteger_EqualMiddle()
+        {
+            var result = LongIntegerMath.SubstructLongInteger(LongInteger.Parse("95555555555555555555555555555555555555555551"), LongInteger.Parse("15555555555555555555555555555555555555555559"));
+            Assert.AreEqual(LongInteger.Parse("79999999999999999999999999999999999999999992"), result);
+        }
+
+        #endregion
+
+        #region internal
+
+        [TestMethod]
+        public void Div()
+        {
+            Assert.AreEqual(0, -1 / 3);
+            Assert.AreEqual(-2, -2 % 3);
+        }
         #endregion
     }
 }

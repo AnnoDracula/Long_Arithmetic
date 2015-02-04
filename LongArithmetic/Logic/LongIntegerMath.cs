@@ -4,22 +4,6 @@ namespace LongArithmetic.Logic
 {
     public class LongIntegerMath
     {
-        public static bool Equals(LongInteger v1, LongInteger v2)
-        {
-            //            return v1.Equals(v2);
-            if (v1.Negative != v2.Negative)
-                return false;
-            if (v1.Values.Count != v2.Values.Count)
-                return false;
-
-            for (var i = 0; i < v1.Values.Count; i++)
-            {
-                if (v1.Values[i] != v2.Values[i])
-                    return false;
-            }
-            return true;
-        }
-
         /// <summary> Return "0" if (v1 = v2);  Return positive result if (v1 > v2);  Return negative result if (v2 > v1)</summary>>
         /// <param name="v1">compared value 1</param>
         /// <param name="v2"> compared value 2</param>
@@ -53,12 +37,11 @@ namespace LongArithmetic.Logic
                 var i = v1.Values.Count - 1;
                 var j = v2.Values.Count - 1;
                 var remember = 0;
-                while (i >= 0)
+                while (i >= 0 && (j>=0 || remember !=0))
                 {
                     var res = summ.Values[i] + ((j >= 0) ? v2.Values[j] : 0) + remember;
                     remember = res / Constants.Radix;
-                    res = res % Constants.Radix;
-                    summ.Values[i] = res;
+                    summ.Values[i] = res % Constants.Radix;
                     i--;
                     j--;
                 }
@@ -93,32 +76,15 @@ namespace LongArithmetic.Logic
             var i = v1.Values.Count - 1;
             var j = v2.Values.Count - 1;
             var hold = 0;
-            while (i >= 0)
+            while (i >= 0 && (j>=0 || hold !=0))
             {
-              if (substruct.Values[i] < ((j >= 0) ? v2.Values[j] : hold))
-                {
-                    substruct.Values[i] = (substruct.Values[i] + Constants.Radix) - ((j >= 0) ? v2.Values[j] : 0) -
-                                          hold;
-                    hold = 1;
-                }
-                else
-                {
-                    substruct.Values[i] = substruct.Values[i] - ((j >= 0) ? v2.Values[j] : 0) - hold;
-                    hold = 0;
-                }
+                var substrahend = ((j >= 0) ? v2.Values[j] : 0);
+                var res = substruct.Values[i] - substrahend + hold;
+                hold = (res + Constants.Radix)/Constants.Radix - 1;
+                substruct.Values[i] = (res + Constants.Radix)%Constants.Radix;
                 i--;
                 j--;
             }
-            //            while (j >= 0)
-            //            {
-            //                if (substruct.Values[i] < v2.Values[j])
-            //                {
-            //                    DecreasesSignificantBit(substruct, i);
-            //                }
-            //                substruct.Values[i] = substruct.Values[i] - ((j >= 0) ? v2.Values[j] : 0);
-            //                i--;
-            //                j--;
-            //            }
             substruct.Normalize();
             return substruct;
         }
@@ -129,17 +95,5 @@ namespace LongArithmetic.Logic
             result.InverSign();
             return result;
         }
-
-        //        private static void DecreasesSignificantBit(LongInteger value, int i)
-        //        {
-        //            value.Values[i] = (value.Values[i] == 0 ? 1 : value.Values[i]) * Constants.Radix;
-        //            if (value.Values[i - 1] - 1 < 0 && i - 1 > 0)
-        //            {
-        //                var k = i - 1;
-        //                DecreasesSignificantBit(value, k);
-        //            }
-        //            value.Values[i - 1]--;
-        //        }
-
     }
 }

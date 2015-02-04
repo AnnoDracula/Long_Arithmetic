@@ -70,24 +70,34 @@ namespace LongArithmetic.Data
             return Negative;
         }
 
-        //        public override bool Equals(object obj)
-        //        {
-        //            if (obj.GetType() != typeof (LongInteger))
-        //                return false;
-        //            var v2 = (LongInteger)obj;
-        //
-        //            if (Negative != v2.Negative)
-        //                return false;
-        //            if (Values.Count != v2.Values.Count)
-        //                return false;
-        //
-        //            for (var i = 0; i < Values.Count; i++)
-        //            {
-        //                if (Values[i] != v2.Values[i])
-        //                    return false;
-        //            }
-        //            return true;
-        //        }
+        public override bool Equals(object obj)
+        {
+            if (obj is string)
+                return Equals(obj as string);
+            if (obj is LongInteger)
+                return Equals(obj as LongInteger);
+            return false;
+        }
+
+        public bool Equals(string value)
+        {
+            return ToString().Equals(value);
+        }
+
+        public bool Equals(LongInteger value)
+        {
+            if (Negative != value.Negative)
+                return false;
+            if (Values.Count != value.Values.Count)
+                return false;
+
+            for (var i = 0; i < Values.Count; i++)
+            {
+                if (Values[i] != value.Values[i])
+                    return false;
+            }
+            return true;
+        }
 
         public override string ToString()
         {
