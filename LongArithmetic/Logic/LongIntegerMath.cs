@@ -40,6 +40,7 @@ namespace LongArithmetic.Logic
                 i++;
             return sign * v1.Values[i].CompareTo(v2.Values[i]);
         }
+
         public static LongInteger SummLongInteger(LongInteger v1, LongInteger v2)
         {
             if (v1.Values.Count < v2.Values.Count)
@@ -91,16 +92,33 @@ namespace LongArithmetic.Logic
             var substruct = v1.Clone();
             var i = v1.Values.Count - 1;
             var j = v2.Values.Count - 1;
-            while (j >= 0)
+            var hold = 0;
+            while (i >= 0)
             {
-                if (substruct.Values[i] < v2.Values[j])
+              if (substruct.Values[i] < ((j >= 0) ? v2.Values[j] : hold))
                 {
-                    DecreasesSignificantBit(substruct, i);
+                    substruct.Values[i] = (substruct.Values[i] + Constants.Radix) - ((j >= 0) ? v2.Values[j] : 0) -
+                                          hold;
+                    hold = 1;
                 }
-                substruct.Values[i] = substruct.Values[i] - ((j >= 0) ? v2.Values[j] : 0);
+                else
+                {
+                    substruct.Values[i] = substruct.Values[i] - ((j >= 0) ? v2.Values[j] : 0) - hold;
+                    hold = 0;
+                }
                 i--;
                 j--;
             }
+            //            while (j >= 0)
+            //            {
+            //                if (substruct.Values[i] < v2.Values[j])
+            //                {
+            //                    DecreasesSignificantBit(substruct, i);
+            //                }
+            //                substruct.Values[i] = substruct.Values[i] - ((j >= 0) ? v2.Values[j] : 0);
+            //                i--;
+            //                j--;
+            //            }
             substruct.Normalize();
             return substruct;
         }
@@ -112,16 +130,16 @@ namespace LongArithmetic.Logic
             return result;
         }
 
-        private static void DecreasesSignificantBit(LongInteger value, int i)
-        {
-            value.Values[i] = (value.Values[i] == 0 ? 1 : value.Values[i]) * Constants.Radix;
-            if (value.Values[i - 1] - 1 < 0 && i - 1 > 0)
-            {
-                var k = i - 1;
-                DecreasesSignificantBit(value, k);
-            }
-            value.Values[i - 1]--;
-        }
+        //        private static void DecreasesSignificantBit(LongInteger value, int i)
+        //        {
+        //            value.Values[i] = (value.Values[i] == 0 ? 1 : value.Values[i]) * Constants.Radix;
+        //            if (value.Values[i - 1] - 1 < 0 && i - 1 > 0)
+        //            {
+        //                var k = i - 1;
+        //                DecreasesSignificantBit(value, k);
+        //            }
+        //            value.Values[i - 1]--;
+        //        }
 
     }
 }
