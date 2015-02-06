@@ -106,6 +106,19 @@ namespace LongArithmeticTests.Logic
             Assert.AreEqual(LongInteger.Parse("786543767867865354"), result);
         }
 
+        [TestMethod]
+        public void MultiplicationLongInteger_WhithManyZeros()
+        {
+            var result = LongIntegerMath.MultiplicationLongInteger(LongInteger.Parse("786543767867865354"), LongInteger.Parse("100000000000000000"));
+            Assert.AreEqual(LongInteger.Parse("78654376786786535400000000000000000"), result);
+
+            result = LongIntegerMath.MultiplicationLongInteger(LongInteger.Parse("786543767867865354"), LongInteger.Parse("100000000000000086"));
+            Assert.AreEqual(LongInteger.Parse("78654376786786603042764036636420444"), result);
+
+            result = LongIntegerMath.MultiplicationLongInteger(LongInteger.Parse("78654376700000000007865354"), LongInteger.Parse("1000000000000080006"));
+            Assert.AreEqual(LongInteger.Parse("78654376700006292829927614200000629275512124"), result);
+        }
+
         delegate int MathAction(int num1, int num2);
 
         [TestMethod]
