@@ -33,7 +33,7 @@ namespace LongArithmetic.Data
                 str = str.Substring(1);
             }
 
-            int zeroLength = Constants.RadixLength - str.Length % Constants.RadixLength;
+            var zeroLength = Constants.RadixLength - str.Length % Constants.RadixLength;
             str = Utils.ZeroString(zeroLength) + str;
 
             while (str.Length > 0)

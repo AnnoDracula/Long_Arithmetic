@@ -1,5 +1,4 @@
-﻿using System.Collections.Specialized;
-using LongArithmetic.Data;
+﻿using LongArithmetic.Data;
 
 namespace LongArithmetic.Logic
 {

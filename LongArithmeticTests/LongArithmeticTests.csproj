@@ -52,7 +52,10 @@
   <ItemGroup>
     <Compile Include="Data\LongIntegerTests.cs" />
     <Compile Include="Data\UtilsTests.cs" />
-    <Compile Include="Logic\LongIntegerMathTests.cs" />
+    <Compile Include="Logic\EqualsTests.cs" />
+    <Compile Include="Logic\CompareTests.cs" />
+    <Compile Include="Logic\SubstructLongIntegerTests.cs" />
+    <Compile Include="Logic\SumLongIntegerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
