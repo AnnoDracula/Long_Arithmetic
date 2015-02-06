@@ -1,4 +1,8 @@
-﻿using LongArithmetic.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Threading;
+using LongArithmetic.Data;
 
 namespace LongArithmetic.Logic
 {
@@ -55,6 +59,48 @@ namespace LongArithmetic.Logic
                 return OppositeValue(SubstructLongInteger(v2, v1));
 
             return CalculationSumAndSubstruct(v1, v2, -1);
+        }
+
+        public static LongInteger MultiplicationLongInteger(LongInteger v1, LongInteger v2)
+        {
+            if (v1.Values.Count < v2.Values.Count)
+                MultiplicationLongInteger(v2, v1);
+
+            if (v1.Equals("0") || v2.Equals("0")) return LongInteger.Parse("0");
+
+            var multResult = LongInteger.Parse("0");
+
+            var j = v2.Values.Count - 1;
+            var n = 0;
+            while (j >= 0)
+            {
+                var result = v1.Clone();
+                result.Negative = false;
+                var i = v1.Values.Count - 1;
+                var hold = 0;
+                while (i >= 0)
+                {
+                    var res = v1.Values[i] * v2.Values[j] + hold;
+                    hold = res / Constants.Radix;
+                    result.Values[i] = res % Constants.Radix;
+                    i--;
+                }
+                if (hold != 0)
+                    result.Values.Insert(0, hold);
+
+                for (var k = 0; k < n; k++)
+                {
+                    result.Values.Add(0);
+                }
+
+                multResult = SumLongInteger(multResult, result);
+                j--;
+                n++;
+            }
+
+            multResult.Negative = v1.Negative != v2.Negative;
+            multResult.Normalize();
+            return multResult;
         }
 
         public static LongInteger OppositeValue(LongInteger value)

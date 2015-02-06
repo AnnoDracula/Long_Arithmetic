@@ -6,7 +6,7 @@ namespace LongArithmetic.Data
 {
     public class LongInteger : ILongNumber
     {
-        internal readonly List<int> Values;
+        internal List<int> Values;
         internal bool Negative;
 
 
