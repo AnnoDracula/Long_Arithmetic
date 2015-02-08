@@ -55,6 +55,7 @@
     <Compile Include="Logic\DivisionTests.cs" />
     <Compile Include="Logic\EqualsTests.cs" />
     <Compile Include="Logic\CompareTests.cs" />
+    <Compile Include="Logic\FactorialTests.cs" />
     <Compile Include="Logic\ModuleTests.cs" />
     <Compile Include="Logic\MultiplicationLongIntegerTests.cs" />
     <Compile Include="Logic\PowerTests.cs" />

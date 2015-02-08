@@ -61,7 +61,7 @@ namespace LongArithmeticTests.Logic
        public void DivisionLongInteger_Positives_SecondLonger()
        {
            var result = LongIntegerMath.DivisionLongInteger(LongInteger.Parse("16378"), LongInteger.Parse("86754358"));
-           Assert.AreEqual(LongInteger.Parse("0.0001887859"), result);
+           Assert.AreEqual(LongInteger.Parse("0"), result);
        }
 
        [TestMethod]
@@ -75,7 +75,7 @@ namespace LongArithmeticTests.Logic
        public void DivisionLongInteger_Negatives_SecondLonger()
        {
            var result = LongIntegerMath.DivisionLongInteger(LongInteger.Parse("-16378"), LongInteger.Parse("-86754358"));
-           Assert.AreEqual(LongInteger.Parse("0.0001887859"), result);
+           Assert.AreEqual(LongInteger.Parse("0"), result);
        }
 
        [TestMethod]

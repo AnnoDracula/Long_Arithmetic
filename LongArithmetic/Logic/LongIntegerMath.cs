@@ -105,10 +105,29 @@ namespace LongArithmetic.Logic
         } 
         public static LongInteger Power(LongInteger value, LongInteger exponent)
         {
-            var result = value.Clone();
+            var result = LongInteger.Parse("1");
+            if (exponent.Negative)
+                return DivisionLongInteger(result, Power(value, Module(exponent)));
+            
+            for (var i = LongInteger.Parse("1"); Compare(i, exponent) <= 0; i = SumLongInteger(i, LongInteger.Parse("1")))
+            {
+                result = MultiplicationLongInteger(result, value);
+            }
             return result;
         }
 
+        public static LongInteger Factorial(LongInteger value)
+        {
+            if (value.Negative)
+                throw new ArgumentException("Factorial x! is not defined for negative x");
+            var result = LongInteger.Parse("1");
+            for (var i = LongInteger.Parse("1"); Compare(i, value) <= 0; i = SumLongInteger(i, LongInteger.Parse("1")))
+            {
+                result = MultiplicationLongInteger(result, i);
+            }
+            return result;
+
+        }
         public static LongInteger OppositeValue(LongInteger value)
         {
             var result = value.Clone();
