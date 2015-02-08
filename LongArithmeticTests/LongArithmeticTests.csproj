@@ -52,9 +52,12 @@
   <ItemGroup>
     <Compile Include="Data\LongIntegerTests.cs" />
     <Compile Include="Data\UtilsTests.cs" />
+    <Compile Include="Logic\DivisionTests.cs" />
     <Compile Include="Logic\EqualsTests.cs" />
     <Compile Include="Logic\CompareTests.cs" />
+    <Compile Include="Logic\ModuleTests.cs" />
     <Compile Include="Logic\MultiplicationLongIntegerTests.cs" />
+    <Compile Include="Logic\PowerTests.cs" />
     <Compile Include="Logic\SubstructLongIntegerTests.cs" />
     <Compile Include="Logic\SumLongIntegerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

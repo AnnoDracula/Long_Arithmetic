@@ -118,22 +118,5 @@ namespace LongArithmeticTests.Logic
             result = LongIntegerMath.MultiplicationLongInteger(LongInteger.Parse("78654376700000000007865354"), LongInteger.Parse("1000000000000080006"));
             Assert.AreEqual(LongInteger.Parse("78654376700006292829927614200000629275512124"), result);
         }
-
-        delegate int MathAction(int num1, int num2);
-
-        [TestMethod]
-        public void TestDelegate()
-        {
-            MathAction sum = (num1, num2) => num1 + num2;
-            MathAction sub = (num1, num2) => num1 - num2;
-            MathAction mult = (num1, num2) => num1*num2;
-            MathAction div = (num1, num2) => num1/num2;
-
-            Assert.AreEqual(sum(1,2), 3);
-            Assert.AreEqual(sub(1,2), -1);
-            Assert.AreEqual(mult(1,2), 2);
-            Assert.AreEqual(div(1,2), 0);
-        }
-
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Threading;
 using LongArithmetic.Data;
 
 namespace LongArithmetic.Logic
@@ -74,8 +71,7 @@ namespace LongArithmetic.Logic
             var n = 0;
             while (j >= 0)
             {
-                var result = v1.Clone();
-                result.Negative = false;
+                var result = Module(v1.Clone());
                 var i = v1.Values.Count - 1;
                 var hold = 0;
                 while (i >= 0)
@@ -103,10 +99,27 @@ namespace LongArithmetic.Logic
             return multResult;
         }
 
+        public static LongInteger DivisionLongInteger(LongInteger v1, LongInteger v2)
+        {
+           throw new NotImplementedException();
+        } 
+        public static LongInteger Power(LongInteger value, LongInteger exponent)
+        {
+            var result = value.Clone();
+            return result;
+        }
+
         public static LongInteger OppositeValue(LongInteger value)
         {
             var result = value.Clone();
             result.InverSign();
+            return result;
+        }
+
+        public static LongInteger Module(LongInteger value)
+        {
+            var result = value.Clone();
+            result.Negative = false;
             return result;
         }
 
