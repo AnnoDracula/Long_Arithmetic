@@ -12,14 +12,14 @@ namespace LongArithmeticTests.Logic
         public void DivisionIntoSmall_AtZero()
         {
             var result = LongIntegerMath.DivisionIntoSmall(LongInteger.Parse("78652868637835437863"), 0);
-            Assert.AreEqual(Constant.Infinity, result);
+            Assert.AreEqual(new InfinityLongNumber(), result);
         }
 
         [TestMethod]
         public void DivisionIntoSmall_NegativeAtZero()
         {
             var result = LongIntegerMath.DivisionIntoSmall(LongInteger.Parse("-78652868637835437863"), 0);
-            Assert.AreEqual(Constant.Infinity, result);
+            Assert.AreEqual(new InfinityLongNumber(true), result);
         }
 
         [TestMethod]
@@ -84,21 +84,20 @@ namespace LongArithmeticTests.Logic
         {
             var result = LongIntegerMath.DivisionIntoSmall(LongInteger.Parse("78652868637835437863"), 5887637);
             Assert.AreEqual(LongInteger.Parse("13358987423619"), result);
-        }
-        //or return exception?        
+        }     
 
         [TestMethod]
         public void DivisionLongInteger_AtZero()
         {
             var result = LongIntegerMath.DivisionLongInteger(LongInteger.Parse("86754358512222876"), LongInteger.Parse("0"));
-            Assert.AreEqual(Constant.Infinity, result);
+            Assert.AreEqual(new InfinityLongNumber(), result);
         }
 
         [TestMethod]
         public void DivisionLongInteger_NegativeAtZero()
         {
             var result = LongIntegerMath.DivisionLongInteger(LongInteger.Parse("-86754358512222876"), LongInteger.Parse("0"));
-            Assert.AreEqual(Constant.Infinity, result);
+            Assert.AreEqual(new InfinityLongNumber(true), result);
         }
 
         [TestMethod]

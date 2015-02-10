@@ -99,9 +99,9 @@ namespace LongArithmetic.Logic
             return multResult;
         }
 
-        public static LongInteger DivisionIntoSmall(LongInteger v1, int v2)
+        public static ILongNumber DivisionIntoSmall(LongInteger v1, int v2)
         {
-            if (v2 > Constants.Radix)
+            if (v2 >= Constants.Radix)
             {
                 var divider = LongInteger.Parse(Convert.ToString(v2));
                 return DivisionLongInteger(v1, divider);
@@ -109,8 +109,7 @@ namespace LongArithmetic.Logic
 
             if (v2 == 0)
             {
-                throw new DivideByZeroException();
-//                return Constant.Infinity;
+                return v1.IsNegative() ? new InfinityLongNumber(true) : new InfinityLongNumber();
             }
 
             var result = v1.Clone();
@@ -133,16 +132,40 @@ namespace LongArithmetic.Logic
             return result;
         }
 
-        public static LongInteger DivisionLongInteger(LongInteger v1, LongInteger v2)
+        public static ILongNumber DivisionLongInteger(LongInteger v1, LongInteger v2)
         {
-            throw new NotImplementedException();
+            ILongNumber result = Module(v1);
+            var modulo = Module(v2);
+            var resultIsNegative = v1.IsNegative() != v2.IsNegative();
+            if (v2.Values.Count == 1)
+                result = DivisionIntoSmall(result as LongInteger , v2.Values[0]);
+            else
+            {
+                var low = 0;
+                var up = Constants.Radix;
+                while ((up - low) > 1)
+                {
+                    var midRange = (low + up) / 2;
+                    var res = MultiplicationLongInteger(modulo, LongInteger.Parse(Convert.ToString(midRange)));
+                    if (Compare(res, modulo) > 0)
+                        //                        up = up - up/2;
+                        up = midRange;
+                    else
+                        //                        low = low + up/2;
+                        low = midRange;
+                }
+                throw new NotImplementedException();
+            }
+            if (resultIsNegative)
+                result.InverSign();
+            return result;
         }
 
-        public static LongInteger Power(LongInteger value, LongInteger exponent)
+        public static ILongNumber Power(LongInteger value, LongInteger exponent)
         {
             var result = LongInteger.Parse("1");
             if (exponent.Negative)
-                return DivisionLongInteger(result, Power(value, Module(exponent)));
+                return DivisionLongInteger(result, Power(value, Module(exponent)) as LongInteger);
 
             for (var i = LongInteger.Parse("1");
                 Compare(i, exponent) <= 0;

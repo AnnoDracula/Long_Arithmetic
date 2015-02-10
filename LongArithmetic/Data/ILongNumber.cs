@@ -1,6 +1,6 @@
 ﻿namespace LongArithmetic.Data
 {
-    internal interface ILongNumber
+    public interface ILongNumber
     {
         bool IsNegative();
         void InverSign();

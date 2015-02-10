@@ -44,7 +44,7 @@ namespace LongArithmeticTests.Logic
          public void Power_PositiveAtNegativeSecondExponent()
          {
              var result = LongIntegerMath.Power(LongInteger.Parse("86754"), LongInteger.Parse("-2"));
-             Assert.AreEqual(LongIntegerMath.DivisionLongInteger(LongInteger.Parse("1"), LongIntegerMath.Power(LongInteger.Parse("86754"), LongInteger.Parse("2"))), result);
+             Assert.AreEqual(LongIntegerMath.DivisionLongInteger(LongInteger.Parse("1"), LongIntegerMath.Power(LongInteger.Parse("86754"), LongInteger.Parse("2")) as LongInteger), result);
          }
 
          [Timeout(1000)]
@@ -92,7 +92,7 @@ namespace LongArithmeticTests.Logic
          public void Power_NegativeAtNegativeSecondExponent()
          {
              var result = LongIntegerMath.Power(LongInteger.Parse("-86754"), LongInteger.Parse("-2"));
-             Assert.AreEqual(LongIntegerMath.DivisionLongInteger(LongInteger.Parse("1"), LongIntegerMath.Power(LongInteger.Parse("-86754"), LongInteger.Parse("2"))), result);
+             Assert.AreEqual(LongIntegerMath.DivisionLongInteger(LongInteger.Parse("1"), LongIntegerMath.Power(LongInteger.Parse("-86754"), LongInteger.Parse("2")) as LongInteger), result);
          }
 
          [Timeout(1000)]

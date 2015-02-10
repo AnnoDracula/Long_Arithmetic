@@ -39,7 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\BaseLongNumber.cs" />
     <Compile Include="Data\Constants.cs" />
+    <Compile Include="Data\InfinityLongNumber.cs" />
     <Compile Include="Data\Utils.cs" />
     <Compile Include="Data\ILongNumber.cs" />
     <Compile Include="Data\LongInteger.cs" />

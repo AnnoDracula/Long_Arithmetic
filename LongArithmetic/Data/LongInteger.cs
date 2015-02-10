@@ -4,21 +4,19 @@ using System.Globalization;
 
 namespace LongArithmetic.Data
 {
-    public class LongInteger : ILongNumber
+    public class LongInteger : BaseLongNumber
     {
         internal List<int> Values;
-        internal bool Negative;
-
 
         private LongInteger()
+            : base(false)
         {
-            Negative = false;
             Values = new List<int>();
         }
 
         private LongInteger(LongInteger clonableObject)
+            : base(clonableObject.IsNegative())
         {
-            Negative = clonableObject.Negative;
             Values = new List<int>(clonableObject.Values);
         }
 
@@ -58,16 +56,6 @@ namespace LongArithmetic.Data
         public LongInteger Clone()
         {
             return new LongInteger(this);
-        }
-
-        public void InverSign()
-        {
-            Negative = !Negative;
-        }
-
-        public bool IsNegative()
-        {
-            return Negative;
         }
 
         public override bool Equals(object obj)
