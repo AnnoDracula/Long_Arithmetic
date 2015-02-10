@@ -99,17 +99,54 @@ namespace LongArithmetic.Logic
             return multResult;
         }
 
+        public static LongInteger DivisionIntoSmall(LongInteger v1, int v2)
+        {
+            if (v2 > Constants.Radix)
+            {
+                var divider = LongInteger.Parse(Convert.ToString(v2));
+                return DivisionLongInteger(v1, divider);
+            }
+
+            if (v2 == 0)
+            {
+                throw new DivideByZeroException();
+//                return Constant.Infinity;
+            }
+
+            var result = v1.Clone();
+            var modulo = 0;
+            var i = 0;
+            while (i < v1.Values.Count)
+            {
+                var res = modulo * Constants.Radix + v1.Values[i];
+                result.Values[i] = (res / Math.Abs(v2));
+                modulo = (res % Math.Abs(v2));
+                i++;
+            }
+
+            if (v1.Negative || v2 < 0)
+                result.Negative = true;
+            if (v1.Negative && v2 < 0)
+                result.Negative = false;
+
+            result.Normalize();
+            return result;
+        }
+
         public static LongInteger DivisionLongInteger(LongInteger v1, LongInteger v2)
         {
-           throw new NotImplementedException();
-        } 
+            throw new NotImplementedException();
+        }
+
         public static LongInteger Power(LongInteger value, LongInteger exponent)
         {
             var result = LongInteger.Parse("1");
             if (exponent.Negative)
                 return DivisionLongInteger(result, Power(value, Module(exponent)));
-            
-            for (var i = LongInteger.Parse("1"); Compare(i, exponent) <= 0; i = SumLongInteger(i, LongInteger.Parse("1")))
+
+            for (var i = LongInteger.Parse("1");
+                Compare(i, exponent) <= 0;
+                i = SumLongInteger(i, LongInteger.Parse("1")))
             {
                 result = MultiplicationLongInteger(result, value);
             }
@@ -128,6 +165,7 @@ namespace LongArithmetic.Logic
             return result;
 
         }
+
         public static LongInteger OppositeValue(LongInteger value)
         {
             var result = value.Clone();
@@ -165,5 +203,6 @@ namespace LongArithmetic.Logic
 
             return result;
         }
+
     }
 }

@@ -10,6 +10,7 @@ namespace LongArithmetic.Data
 
     public class Constant
     {
+        public const int Radix = Constants.Radix;
         public const string Infinity = "Infinity";
     }
 }
